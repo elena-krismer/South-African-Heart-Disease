@@ -23,3 +23,8 @@ Journal.](https://pubmed.ncbi.nlm.nih.gov/6623218/)
 - alcohol		current alcohol consumption
 - age		age at onset
 - chd		response, coronary heart disease
+
+Useful links:
+[old report - regression](http://www.math.chalmers.se/Stat/Grundutb/GU/MSG500/A09/RegSummary09.pdf)
+
+[Support Vector Machine, K Nearest Neighbour, ANN](https://blog.goodaudience.com/heart-disease-prediction-aa656f2db585)
