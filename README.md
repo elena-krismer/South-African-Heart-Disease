@@ -13,13 +13,13 @@ Journal.](https://pubmed.ncbi.nlm.nih.gov/6623218/)
 
 ## Attributes
 
-sbp		systolic blood pressure
-tobacco		cumulative tobacco (kg)
-ldl		low densiity lipoprotein cholesterol
-adiposity
-famhist		family history of heart disease (Present, Absent)
-typea		type-A behavior
-obesity
-alcohol		current alcohol consumption
-age		age at onset
-chd		response, coronary heart disease
+- sbp		systolic blood pressure
+- tobacco		cumulative tobacco (kg)
+- ldl		low densiity lipoprotein cholesterol
+- adiposity
+- famhist		family history of heart disease (Present, Absent)
+- typea		type-A behavior
+- obesity
+- alcohol		current alcohol consumption
+- age		age at onset
+- chd		response, coronary heart disease
