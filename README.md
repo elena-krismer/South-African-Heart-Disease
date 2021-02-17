@@ -9,7 +9,7 @@ pressure reduction treatment and other programs to reduce their risk
 factors after their CHD event. In some cases the measurements were
 made after these treatments. These data are taken from a larger
 dataset, described in  [Rousseauw et al, 1983, South African Medical
-Journal.](https://pubmed.ncbi.nlm.nih.gov/6623218/)
+Journal.](https://journals.co.za/doi/pdf/10.10520/AJA20785135_9894)
 
 ## Attributes
 
