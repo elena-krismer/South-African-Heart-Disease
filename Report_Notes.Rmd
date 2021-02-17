@@ -1,0 +1,45 @@
+## Description of your data set
+
+The  South African Heart disease dataset, is a subset of the Coronary Risk Factor Study (CORIS) baseline study. The data was obtained by Rossouw et al. 1983. 
+to investigate the impact of risk factors like hypertension and smoking on the prevalence of ischaemic heart diseases (IHD) among the South African population.
+Our dataset consists of 462 samples, obtained from male high-risk individuals. Each sample includes the following information:  
+low-density lipoprotein cholesterol (ldl), adiposity, obesity, family history (famhist), systolic blood pressure (sbp), tobacco, type-A behavior
+
+## Detailed explanation of the attributes
+Study used to different cut off point levels for diagnostic values (Disclaimer: cut-off points changed slightly 1983-2021!)
+
+### sbp		systolic blood pressure - continous, ratio
+mmHg (normal value 120 mmHg). A systolic blood pressure higher than 140mmHg is considered as hypertension (Unger et al., 2020). 
+
+A: >160 mmHg
+
+B: >140 mmHg
+
+### tobacco		cumulative tobacco (kg) - discrete 
+A: > 10/d
+B: **
+### ldl		low densiity lipoprotein cholesterol - continous, ratio 
+Hypercholestermia: 6.5mmol/l(250mg/dl)
+
+A: >6.5 mmol/l
+
+B: >5.7 mmol/l
+
+### famhist		family history of heart disease (Present, Absent)
+### typea		type-A behavior - ordinal 
+" The cut-off points for 'obesity' and for 'overweight' were those advocated by Bray.lo The Bortner Short Rating ScaleS used for the assessment ofcoronary-prone (type A) behaviour was modified to yield 12 seven-point bipolar scales for characteristics such as competitiveness, impatience and striving. Those who fell in the upper two-fifths of the possible total score
+of 12 - 84, i.e. 55 points or more, were arbitrarily classified as exhibiting type A behaviour"
+### obesity - ratio
+BMI (weight/height^2) obese > 30
+
+### adiposity - ratio
+body fat measures %
+
+### alcohol		current alcohol consumption - ratio
+### age		age at onset
+### chd		response, coronary heart disease
+
+
+## References
+Unger T, Borghi C, Charchar F, Khan NA, Poulter NR, Prabhakaran D, Ramirez A, Schlaich M, Stergiou GS, Tomaszewski M, Wainford RD, Williams B, Schutte AE. 2020 International Society of Hypertension Global Hypertension Practice Guidelines. Hypertension. 2020 Jun;75(6):1334-1357. doi: 10.1161/HYPERTENSIONAHA.120.15026. Epub 2020 May 6. PMID: 32370572.
+
