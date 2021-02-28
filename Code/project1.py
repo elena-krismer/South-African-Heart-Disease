@@ -20,7 +20,7 @@ def plot2attributes(att1, att2, X, y, attributeNames, classNames, C):
 # Plot component variance
 def plotComponentVariance(X):
     Y = X - np.ones((N, 1)) * X.mean(axis=0)
-    # Y=Y*(1/np.std(Y,0))
+    Y=Y*(1/np.std(Y,0))
 
     U, S, V = svd(Y, full_matrices=False)
     rho = (S * S) / (S * S).sum()
@@ -31,9 +31,9 @@ def plotComponentVariance(X):
     plt.plot(range(1, len(rho) + 1), rho, 'x-')
     plt.plot(range(1, len(rho) + 1), np.cumsum(rho), 'o-')
     plt.plot([1, len(rho)], [threshold, threshold], 'k--')
-    plt.title('Variance explained by principal components');
-    plt.xlabel('Principal component');
-    plt.ylabel('Variance explained');
+    plt.title('Variance explained by principal components')
+    plt.xlabel('Principal component')
+    plt.ylabel('Variance explained')
     plt.legend(['Individual', 'Cumulative', 'Threshold'])
     plt.grid()
     plt.show()
@@ -42,7 +42,7 @@ def plotComponentVariance(X):
 # Scatter plot 2 components
 def plot2components(X):
     Y = X - np.ones((N, 1)) * X.mean(axis=0)
-    # Y=Y*(1/np.std(Y,0))
+    Y=Y*(1/np.std(Y,0))
 
     U, S, V = svd(Y, full_matrices=False)
 
@@ -64,6 +64,23 @@ def plot2components(X):
     plt.ylabel('PC{0}'.format(j + 1))
     plt.show()
 
+def plotHist(X, N, M, attributeNames):
+    plt.figure(figsize=(12, 12))
+    u = np.floor(np.sqrt(M))
+    v = np.ceil(float(M) / u)
+    for i in range(M):
+        plt.subplot(u, v, i + 1)
+        plt.hist(X[:, i])
+        plt.xlabel(attributeNames[i])
+        plt.ylim(0, N / 2)
+    plt.show()
+
+def boxplots(X, M, attributeNames):
+    plt.figure(figsize=(8, 7))
+    plt.boxplot(X)
+    plt.xticks(range(1, M+1), attributeNames)
+    plt.title('South Africa Heart Disease data set - boxplot')
+    plt.show()
 
 # file reader
 filename = '../Data/SAheart.csv'
@@ -92,3 +109,7 @@ plot2attributes(0, 1, X, y, attributeNames, classNames, C)
 plotComponentVariance(X)
 
 plot2components(X)
+
+plotHist(X, N, M, attributeNames)
+
+boxplots(X, M, attributeNames)
