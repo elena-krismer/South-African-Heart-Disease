@@ -82,6 +82,34 @@ def boxplots(X, M, attributeNames):
     plt.title('South Africa Heart Disease data set - boxplot')
     plt.show()
 
+def scatterAllAttributes(X, M, attributeNames):
+    plt.figure(figsize=(12, 10))
+    for m1 in range(M):
+        for m2 in range(M):
+            plt.subplot(M, M, m1 * M + m2 + 1)
+            for c in range(C):
+                class_mask = (y == c)
+                plt.plot(np.array(X[class_mask, m2]), np.array(X[class_mask, m1]), '.')
+                if m1 == M - 1:
+                    plt.xlabel(attributeNames[m2])
+                else:
+                    plt.xticks([])
+                if m2 == 0:
+                    plt.ylabel(attributeNames[m1])
+                else:
+                    plt.yticks([])
+    plt.legend(classNames)
+    plt.show()
+
+def printStatistics(X, M, attributeNames):
+    for i in range(0, M):
+        print('\nattribute:', attributeNames[i])
+        print('Mean:', X[:, i].mean())
+        print('Standard Deviation:', X[:, i].std(ddof=1))
+        print('Median:',  np.median(X[:, i]))
+        print('Range:', X[:, i].max()-X[:, i].min())
+
+
 # file reader
 filename = '../Data/SAheart.csv'
 df = pd.read_csv(filename)
@@ -113,3 +141,7 @@ plot2components(X)
 plotHist(X, N, M, attributeNames)
 
 boxplots(X, M, attributeNames)
+
+scatterAllAttributes(X, M, attributeNames)
+
+printStatistics(X, M, attributeNames)
