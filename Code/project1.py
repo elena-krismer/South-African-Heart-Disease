@@ -16,37 +16,14 @@ def plot2attributes(att1, att2, X, y, attributeNames, classNames, C):
     plt.ylabel(attributeNames[att2])
     plt.show()
 
-
-# Plot component variance
-def plotComponentVariance(X):
-    Y = X - np.ones((N, 1)) * X.mean(axis=0)
-    Y=Y*(1/np.std(Y,0))
-
-    U, S, V = svd(Y, full_matrices=False)
-    rho = (S * S) / (S * S).sum()
-
-    threshold = 0.9
-
-    plt.figure()
-    plt.plot(range(1, len(rho) + 1), rho, 'x-')
-    plt.plot(range(1, len(rho) + 1), np.cumsum(rho), 'o-')
-    plt.plot([1, len(rho)], [threshold, threshold], 'k--')
-    plt.title('Variance explained by principal components')
-    plt.xlabel('Principal component')
-    plt.ylabel('Variance explained')
-    plt.legend(['Individual', 'Cumulative', 'Threshold'])
-    plt.grid()
-    plt.show()
-
-
 # Scatter plot 2 components
 def plot2components(X):
     Y = X - np.ones((N, 1)) * X.mean(axis=0)
     Y=Y*(1/np.std(Y,0))
 
-    U, S, V = svd(Y, full_matrices=False)
+    U, S, Vh = svd(Y, full_matrices=False)
 
-    V = V.T
+    V = Vh.T
     Z = Y @ V
 
     i = 0
@@ -54,7 +31,7 @@ def plot2components(X):
 
     # Plot PCA of the data
     plt.figure()
-    plt.title('NanoNose data: PCA')
+    plt.title('Projected Data')
     # Z = array(Z)
     for c in range(C):
         class_mask = y == c
@@ -109,6 +86,64 @@ def printStatistics(X, M, attributeNames):
         print('Median:',  np.median(X[:, i]))
         print('Range:', X[:, i].max()-X[:, i].min())
 
+def PCAnalysis(X):
+    Y = X - np.ones((N, 1)) * X.mean(axis=0)
+    Y = Y * (1 / np.std(Y, 0))
+
+    U, S, Vh = svd(Y, full_matrices=False)
+    V = Vh.T
+
+    rho = (S * S) / (S * S).sum()
+
+    threshold = 0.9
+    plt.figure()
+    plt.plot(range(1, len(rho) + 1), rho, 'x-')
+    plt.plot(range(1, len(rho) + 1), np.cumsum(rho), 'o-')
+    plt.plot([1, len(rho)], [threshold, threshold], 'k--')
+    plt.title('Variance explained by principal components')
+    plt.xlabel('Principal component')
+    plt.ylabel('Variance explained')
+    plt.legend(['Individual', 'Cumulative', 'Threshold'])
+    plt.grid()
+    plt.show()
+
+    i = 0
+    j = 1
+    plt.figure()
+    for att in range(V.shape[1]):
+        plt.arrow(0, 0, V[att, i], V[att, j])
+        plt.text(V[att, i], V[att, j], attributeNames[att])
+    plt.xlim([-1, 1])
+    plt.ylim([-1, 1])
+    plt.xlabel('PC' + str(i + 1))
+    plt.ylabel('PC' + str(j + 1))
+    plt.grid()
+    # Add a unit circle
+    plt.plot(np.cos(np.arange(0, 2 * np.pi, 0.01)),
+             np.sin(np.arange(0, 2 * np.pi, 0.01)));
+    plt.title('Attribute coefficients')
+    plt.axis('equal')
+    plt.show()
+    for i in range(4):
+        print('PC{}:'.format(i+1))
+        print(V[:, i])
+
+    Z = Y @ V
+
+    i = 0
+    j = 1
+    # Plot PCA of the data
+    plt.figure()
+    plt.title('Projected Data')
+    for c in range(C):
+        class_mask = y == c
+        plt.plot(Z[class_mask, i], Z[class_mask, j], 'o', alpha=.5)
+    plt.legend(classNames)
+    plt.xlabel('PC{0}'.format(i + 1))
+    plt.ylabel('PC{0}'.format(j + 1))
+    plt.show()
+
+
 
 # file reader
 filename = '../Data/SAheart.csv'
@@ -134,9 +169,7 @@ C = len(classNames)
 
 plot2attributes(0, 1, X, y, attributeNames, classNames, C)
 
-plotComponentVariance(X)
-
-plot2components(X)
+#plot2components(X)
 
 plotHist(X, N, M, attributeNames)
 
@@ -145,3 +178,5 @@ boxplots(X, M, attributeNames)
 scatterAllAttributes(X, M, attributeNames)
 
 printStatistics(X, M, attributeNames)
+
+PCAnalysis(X)
