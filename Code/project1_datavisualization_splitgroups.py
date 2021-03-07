@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 
-filename = 'data/SAheart.csv'
+filename = '../Data/SAheart.csv'
 df = pd.read_csv(filename)
 
 ax = sns.countplot(x="famhist", hue = "chd", data=df)
