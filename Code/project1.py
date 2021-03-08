@@ -16,31 +16,7 @@ def plot2attributes(att1, att2, X, y, attributeNames, classNames, C):
     plt.ylabel(attributeNames[att2])
     plt.show()
 
-# Scatter plot 2 components
-def plot2components(X):
-    Y = X - np.ones((N, 1)) * X.mean(axis=0)
-    Y=Y*(1/np.std(Y,0))
-
-    U, S, Vh = svd(Y, full_matrices=False)
-
-    V = Vh.T
-    Z = Y @ V
-
-    i = 0
-    j = 1
-
-    # Plot PCA of the data
-    plt.figure()
-    plt.title('Projected Data')
-    # Z = array(Z)
-    for c in range(C):
-        class_mask = y == c
-        plt.plot(Z[class_mask, i], Z[class_mask, j], 'o', alpha=.5)
-    plt.legend(classNames)
-    plt.xlabel('PC{0}'.format(i + 1))
-    plt.ylabel('PC{0}'.format(j + 1))
-    plt.show()
-
+#dataset histograms
 def plotHist(X, N, M, attributeNames):
     plt.figure(figsize=(12, 12))
     u = np.floor(np.sqrt(M))
@@ -52,6 +28,7 @@ def plotHist(X, N, M, attributeNames):
         plt.ylim(0, N / 2)
     plt.show()
 
+#dataset boxplots
 def boxplots(X, M, attributeNames):
     plt.figure(figsize=(8, 7))
     plt.boxplot(X)
@@ -59,14 +36,18 @@ def boxplots(X, M, attributeNames):
     plt.title('South Africa Heart Disease data set - boxplot')
     plt.show()
 
+#scatter plot for every pair
 def scatterAllAttributes(X, M, attributeNames):
     plt.figure(figsize=(12, 10))
+    X = np.delete(X, 4, axis=1)
+    attributeNames=np.delete(attributeNames, 4)
+    M=M-1
     for m1 in range(M):
         for m2 in range(M):
             plt.subplot(M, M, m1 * M + m2 + 1)
             for c in range(C):
                 class_mask = (y == c)
-                plt.plot(np.array(X[class_mask, m2]), np.array(X[class_mask, m1]), '.')
+                plt.plot(np.array(X[class_mask, m2]), np.array(X[class_mask, m1]), '.', alpha=0.6)
                 if m1 == M - 1:
                     plt.xlabel(attributeNames[m2])
                 else:
@@ -78,6 +59,7 @@ def scatterAllAttributes(X, M, attributeNames):
     plt.legend(classNames)
     plt.show()
 
+#calculate basic statistics
 def printStatistics(X, M, attributeNames):
     for i in range(0, M):
         print('\nattribute:', attributeNames[i])
@@ -86,13 +68,14 @@ def printStatistics(X, M, attributeNames):
         print('Median:',  np.median(X[:, i]))
         print('Range:', X[:, i].max()-X[:, i].min())
 
+#Principal Component Analysis
 def PCAnalysis(X):
     Y = X - np.ones((N, 1)) * X.mean(axis=0)
     Y = Y * (1 / np.std(Y, 0))
 
     U, S, Vh = svd(Y, full_matrices=False)
     V = Vh.T
-
+    # variance
     rho = (S * S) / (S * S).sum()
 
     threshold = 0.9
@@ -107,6 +90,7 @@ def PCAnalysis(X):
     plt.grid()
     plt.show()
 
+    # plot attribute coefficients
     i = 0
     j = 1
     plt.figure()
@@ -128,11 +112,11 @@ def PCAnalysis(X):
         print('PC{}:'.format(i+1))
         print(V[:, i])
 
+    # project to principal component space
     Z = Y @ V
 
     i = 0
     j = 1
-    # Plot PCA of the data
     plt.figure()
     plt.title('Projected Data')
     for c in range(C):
@@ -143,6 +127,21 @@ def PCAnalysis(X):
     plt.ylabel('PC{0}'.format(j + 1))
     plt.show()
 
+    i = 0
+    j = 1
+    k = 2
+    plt.figure()
+    plt.title('3D Projected Data')
+    ax = plt.axes(projection='3d')
+    colors = ["blue","orange"]
+    for c in range(C):
+        class_mask = y == c
+        ax.scatter3D(Z[class_mask, i], Z[class_mask, j], Z[class_mask, k], c=colors[c],alpha=0.5)
+    plt.legend(classNames)
+    ax.set_xlabel('PC{0}'.format(i + 1))
+    ax.set_ylabel('PC{0}'.format(j + 1))
+    ax.set_zlabel('PC{0}'.format(k + 1))
+    plt.show()
 
 
 # file reader
@@ -169,8 +168,6 @@ C = len(classNames)
 
 plot2attributes(0, 1, X, y, attributeNames, classNames, C)
 
-#plot2components(X)
-
 plotHist(X, N, M, attributeNames)
 
 boxplots(X, M, attributeNames)
@@ -180,3 +177,8 @@ scatterAllAttributes(X, M, attributeNames)
 printStatistics(X, M, attributeNames)
 
 PCAnalysis(X)
+
+# similarity matrix
+df = df.drop('row.names', 1)
+corr=df.corr()
+print(corr)
