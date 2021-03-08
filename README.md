@@ -29,3 +29,5 @@ Journal.](https://journals.co.za/doi/pdf/10.10520/AJA20785135_9894)
 [old report - regression](http://www.math.chalmers.se/Stat/Grundutb/GU/MSG500/A09/RegSummary09.pdf)
 
 [Support Vector Machine, K Nearest Neighbour, ANN](https://blog.goodaudience.com/heart-disease-prediction-aa656f2db585)
+
+[SouthAfricanRepository](https://github.com/khushi4tiwari/South-African-Heart-Disease-data-analysis-using-python)
