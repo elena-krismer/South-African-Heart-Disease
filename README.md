@@ -24,6 +24,18 @@ Journal.](https://journals.co.za/doi/pdf/10.10520/AJA20785135_9894)
 - age		age at onset
 - chd		response, coronary heart disease
 
+Konstatinos:
+- ANN
+- baseline
+
+Büsra:
+- linear regression model
+- logistic regression
+
+Elena:
+- baseline
+- Naive Bayes - take a look
+
 ### Useful links:
 
 [old report - regression](http://www.math.chalmers.se/Stat/Grundutb/GU/MSG500/A09/RegSummary09.pdf)
