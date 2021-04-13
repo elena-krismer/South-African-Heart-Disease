@@ -36,6 +36,7 @@ print(df_pred)
 
 print('Coefficients:', model.coef_)
 print('Intercept:', model.intercept_)
+print("Accuracy", model.score(X_test, y_test))
 print("Mean Absolute Error:", metrics.mean_absolute_error(y_test, y_pred))
 print("Mean Squared Error:", metrics.mean_squared_error(y_test, y_pred))
 print("Root Mean Absolute Error:", np.square(metrics.mean_absolute_error(y_test, y_pred)))
