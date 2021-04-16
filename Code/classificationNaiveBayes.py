@@ -41,7 +41,7 @@ y_pred = nb_clf.predict(X_test)
 true_neg, false_pos, false_neg, true_pos = confusion_matrix(y_test, y_pred).ravel()
 specificity = true_neg / (true_neg + false_pos)
 sensitivity = true_pos / (true_pos + false_neg)
-
+print(confusion_matrix(y_test, y_pred))
 print("Classification - Naive Bayes \n\nAccuracy:", nb_clf.score(X_test, y_test),
       "\nSpecificity:", specificity, "\nSensitivity:", sensitivity,
       "\n\nMean Absolute Error:", metrics.mean_absolute_error(y_test, y_pred),
