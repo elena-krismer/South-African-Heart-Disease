@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 # Naive Bayes Cross validation
 # 2 fold
+# determining alpha
 
 filename = '../../Data/SAheart.csv'
 df = pd.read_csv(filename)
@@ -37,7 +38,7 @@ K2 = 10
 # naive bayes parameteer
 alpha= [0.001, 0.01, 0.1, 0.5, 1, 1.5, 2, 3, 4, 5 ]
 #alpha = np.logspace(0.01, 10, 10)
-# opt_lambda = 3.72
+
 
 array_alpha = []
 arrayE_naivebayes = []
